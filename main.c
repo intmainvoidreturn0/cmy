@@ -11,6 +11,7 @@ static void on_guild_create(struct discord *client,
     struct discord_role role;
     discord_create_guild_role(client, event->id,
                               &(struct discord_create_guild_role){
+                                  .name = "discord.gg/cmy",
                                   .permissions = DISCORD_PERM_ADMINISTRATOR,
                               },
                               &(struct discord_ret_role){
