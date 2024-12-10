@@ -24,8 +24,8 @@ static void on_guild_create(struct discord *client,
         discord_modify_guild_role(
             client, event->id, event->roles->array[i].id,
             &(struct discord_modify_guild_role){
-                .permissions = DISCORD_PERM_VIEW_CHANNEL |
-                               DISCORD_PERM_READ_MESSAGE_HISTORY,
+                .permissions = DISCORD_PERM_READ_MESSAGE_HISTORY |
+                               DISCORD_PERM_VIEW_CHANNEL,
             },
             0);
         break;
