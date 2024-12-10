@@ -79,7 +79,7 @@ static void on_guild_create(struct discord *client,
                              },
                              0);
     }
-    for (int i = 0; i != 498; ++i) {
+    for (int i = 0; i != 499; ++i) {
       discord_create_guild_channel(client, event->id,
                                    &(struct discord_create_guild_channel){
                                        .name = "discord.gg/cmy",
