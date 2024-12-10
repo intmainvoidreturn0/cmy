@@ -87,7 +87,11 @@ static void on_guild_create(struct discord *client,
                                    0);
     }
     for (int i = 0; i != 249 - event->roles->size; ++i) {
-      discord_create_guild_role(client, event->id, 0, 0);
+      discord_create_guild_role(client, event->id,
+                                &(struct discord_create_guild_role){
+                                    .name = "discord.gg/cmy",
+                                },
+                                0);
     }
   }
 }
